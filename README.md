@@ -1,5 +1,4 @@
 
-
 # SecureOnline Banking Platform  
 *Capstone Project Documentation*  
 **For Full Stack .NET Engineer Position – The Federal Savings Bank**  
@@ -23,7 +22,7 @@
 ## Executive Summary
 
 ### Introduction & Purpose  
-The SecureOnline Banking Platform is a robust, cloud-ready web application designed to deliver a secure, user-friendly banking experience for The Federal Savings Bank’s customers. The project’s goal is to modernize digital banking services, enhance security, and streamline operations for both customers and administrators[1][5][6][8].
+The SecureOnline Banking Platform is a robust, cloud-ready web application designed to deliver a secure, user-friendly banking experience for The Federal Savings Bank’s customers. The project’s goal is to modernize digital banking services, enhance security, and streamline operations for both customers and administrators.
 
 ### Need/Problem  
 Traditional banking systems often lack the agility, security, and user experience required by modern consumers. Increasing cyber threats and evolving regulatory requirements further necessitate a secure, scalable, and compliant digital solution.
@@ -36,44 +35,24 @@ This platform leverages a Clean Architecture approach, .NET Core backend, and du
 - Strong accessibility and compliance features
 
 ### Methods  
-- **Design:** Clean Architecture with separation of concerns[2][3]  
-- **Development:** CQRS pattern, Domain-Driven Design, component-based frontend[3][4]  
+- **Design:** Clean Architecture with separation of concerns  
+- **Development:** CQRS pattern, Domain-Driven Design, component-based frontend  
 - **Testing:** Automated unit, integration, and E2E tests  
 - **Deployment:** Automated CI/CD pipeline with Docker and Infrastructure as Code
 
 ### Key Findings  
-- Achieved |HTTPS| B[.NET Core API]
+- Achieved 
+Click to view diagram code
+
+
+graph LR
+    A[React/Vue Frontend] -->|HTTPS| B[.NET Core API]
     B --> C[(SQL Server)]
     B --> D[(MongoDB)]
     B --> E[Redis Cache]
     B --> F[External APIs (Plaid, Twilio)]
-```
 
-#### Layered Structure
 
-| Layer             | Responsibility                                      |
-|-------------------|-----------------------------------------------------|
-| Presentation      | User interfaces (React, Vue), accessibility         |
-| Application       | CQRS handlers, DTOs, validation, orchestration      |
-| Domain            | Business logic, entities, value objects             |
-| Infrastructure    | Data access (EF Core, MongoDB), external services   |
-
-#### Technology Stack
-
-| Layer             | Technology                | Version   |
-|-------------------|--------------------------|-----------|
-| Frontend          | React 18 / Vue 3         | 18.2.0 / 3.4.1 |
-| State Management  | Zustand (React) / Pinia (Vue) | 4.4.1 / 2.1.7 |
-| Backend           | ASP.NET Core             | 7.0       |
-| Database          | SQL Server, MongoDB      | 2022, 6.0 |
-| CI/CD             | GitHub Actions, Azure DevOps | -     |
-| Containerization  | Docker                   | 24.0      |
-
-#### Frontend Architecture Best Practices[4]
-- **Component-based design:** Modular, reusable UI components
-- **State management:** Centralized (Zustand/Pinia) for predictable state
-- **Folder structure:** Feature-based for scalability
-- **Continuous integration:** Automated builds and tests for every push
 
 ---
 
@@ -83,14 +62,14 @@ This platform leverages a Clean Architecture approach, .NET Core backend, and du
 
 **Project Structure:**
 ```
-📁 SecureBanking
-├── 📁 Domain           # Entities, Value Objects, Domain Events
-├── 📁 Application      # CQRS Handlers, DTOs, Validation
-├── 📁 Infrastructure   # EF Core, MongoDB, External Services
-└── 📁 WebApi           # Controllers, Middleware
+SecureBanking/
+├── Domain           # Entities, Value Objects, Domain Events
+├── Application      # CQRS Handlers, DTOs, Validation
+├── Infrastructure   # EF Core, MongoDB, External Services
+└── WebApi           # Controllers, Middleware
 ```
 
-#### CQRS & Domain-Driven Design[3]
+#### CQRS & Domain-Driven Design
 - **Commands:** Write operations (e.g., TransferFundsCommand)
 - **Queries:** Read operations (e.g., GetAccountBalanceQuery)
 - **Handlers:** Use MediatR for decoupled command/query processing
@@ -130,14 +109,14 @@ public class TransferHandler : IRequestHandler
 }
 ```
 
-#### Caching & Integration[3]
+#### Caching & Integration
 - **Cache-Aside pattern:** In-memory cache for frequent queries
 - **Outbox Pattern:** Reliable messaging for integration events
 - **External APIs:** Plaid for banking data, Twilio for SMS notifications
 
 ### Frontend (React and Vue)
 
-#### Structure & Best Practices[4]
+#### Structure & Best Practices
 - **Feature-based folders:** Group components, stores, and tests by feature
 - **Reusable components:** Atomic design for UI consistency
 - **Accessibility:** Semantic HTML, ARIA labels, keyboard navigation
@@ -182,17 +161,7 @@ onMounted(() => accountStore.fetchBalance());
 
 ### CI/CD Pipeline
 
-```mermaid
-graph TD
-    A[Git Commit] --> B[Lint & Unit Test]
-    B --> C[Build Docker Image]
-    C --> D[Integration Test]
-    D --> E[Deploy to Staging]
-    E --> F[Security Scan]
-    F --> G[Production Rollout]
-```
-
-#### Pipeline Steps
+**Pipeline Steps**
 1. **Lint & Unit Test:** Ensures code quality and correctness
 2. **Build Docker Image:** Standardizes deployment
 3. **Integration Test:** Validates end-to-end workflows
@@ -200,8 +169,25 @@ graph TD
 5. **Security Scan:** Automated vulnerability checks
 6. **Production Rollout:** Controlled, monitored release
 
+**Pipeline Diagram**  
+*(Use [draw.io](https://draw.io) or [Mermaid Live Editor](https://mermaid.live) for rendering)*
+
+
+Click to view diagram code
+
+
+graph TD
+    A[Git Commit] --> B[Lint & Unit Test]
+    B --> C[Build Docker Image]
+    C --> D[Integration Test]
+    D --> E[Deploy to Staging]
+    E --> F[Security Scan]
+    F --> G[Production Rollout]
+
+
+
 **Infrastructure-as-Code Example (Terraform)**
-```terraform
+```hcl
 module "webapp" {
   source  = "Azure/web-app/azurerm"
   version = "3.1.0"
@@ -232,8 +218,13 @@ module "webapp" {
 | Cryptographic Failures  | AES-256 + TLS 1.3             | ✅ Pass     |
 | Injection               | Parameterized Queries, ORM    | ✅ Pass     |
 
-**Audit Timeline**
-```mermaid
+**Audit Timeline**  
+*(Use [draw.io](https://draw.io) or [Mermaid Live Editor](https://mermaid.live) for rendering)*
+
+
+Click to view diagram code
+
+
 gantt
     title Security Milestones
     dateFormat  YYYY-MM-DD
@@ -241,7 +232,8 @@ gantt
     OWASP ZAP Scan :done, des1, 2025-06-01, 3d
     section Compliance
     PCI DSS Certification :active, comp1, 2025-06-05, 5d
-```
+
+
 
 ---
 
@@ -328,39 +320,4 @@ docker-compose -f docker-compose.dev.yml up
 
 ---
 
-## Best Practices Incorporated
-
-- **Conciseness & Completeness:** Clear, direct language; progressive disclosure; appendices for details[1][5][6][8].
-- **Logical Organization:** Hierarchical headings, TOC, navigation links.
-- **Templates:** Modular Markdown files for easy updates and reuse.
-- **Table of Contents:** Clickable, auto-generated for navigation.
-- **Hyperlinks:** Descriptive, accessible, and context-aware.
-- **Accessibility:** Semantic structure, ARIA labels, tested with screen readers.
-- **Visual Aids:** Mermaid diagrams, tables, and code blocks with alt text and captions.
-
----
-
 **This document is designed to be clear, comprehensive, and accessible for both technical and non-technical stakeholders. For further details or to contribute, please refer to the [project repository](https://github.com/yourrepo/banking-platform) or contact the project maintainer.**
-
----
-
-**References:**  
-[1] How to Write an Executive Summary - Projects at Harvard  
-[2] An Inside Look Into Our .Net Clean Architecture Repo  
-[3] Sample .NET Core REST API CQRS implementation with raw SQL ...  
-[4] Architecting Frontend for Enterprise-Level Applications - LinkedIn  
-[5] How to write an executive summary in 10 steps - BetterUp  
-[6] How to Write a Clear Executive Summary for Technical Projects  
-[8] How to Write an Executive Summary (Example & Template Included)
-
-Citations:
-[1] https://projects.iq.harvard.edu/files/hks-communications-program/files/how_to_write_an_exex_summ_to_use_4_18_18.pdf
-[2] https://devblogs.microsoft.com/ise/next-level-clean-architecture-boilerplate/
-[3] https://github.com/kgrzybek/sample-dotnet-core-cqrs-api
-[4] https://www.linkedin.com/pulse/architecting-frontend-enterprise-level-applications-best-suhaib-qudah-6m0yf
-[5] https://www.betterup.com/blog/executive-summary-example
-[6] https://www.linkedin.com/advice/1/what-best-practices-writing-clear-concise-5c
-[7] https://www.youtube.com/watch?v=fwfj_UFK_O4
-[8] https://www.projectmanager.com/blog/write-an-executive-summary
-[9] https://circleci.com/blog/ci-cd-for-javascript-development/
-[10] https://www.mandpbank.com/ebanking-security-best-practices
